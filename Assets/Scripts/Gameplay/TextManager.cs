@@ -6,18 +6,15 @@ namespace Gameplay
     public class TextManager : MonoBehaviour
     {
         [SerializeField] private Text _text;
-        [SerializeField] private QuestionManager manager;
 
         public void SetNewText(string newText)
         {
             _text.text = newText;
         }
 
-        public void SetNewTextFromMethod()
+        public void SetNewText(int newText)
         {
-            var text = manager.GenerateQuestion();
-
-            _text.text = text;
+            _text.text = newText.ToString();
         }
     }
 }

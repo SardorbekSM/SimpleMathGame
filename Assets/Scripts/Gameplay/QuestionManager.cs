@@ -12,6 +12,7 @@ namespace Gameplay
     {
         [SerializeField] private QuestionData _questionData;
         [SerializeField] private RandomNumberGenerator _randomizer;
+        [SerializeField] private UnityStringEvent _questionText;
 
         private int _leftTerm;
         private int _rightTerm;

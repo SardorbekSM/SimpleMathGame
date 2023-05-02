@@ -11,7 +11,7 @@ namespace Core
         
         public void SetMinMaxRange(int min, int max)
         {
-            _min = max;
+            _min = min;
             _max = max;
         }
 

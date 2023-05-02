@@ -15,12 +15,9 @@ namespace Gameplay
 
         public void StatGame()
         {
-            for (int i = 0; i < 5; i++)
-            {
                 var questionText = _questionManager.GenerateQuestion();
                 
                 _questionText.SetNewText(questionText);
-            }
         }
 
         public void CheckAnswer(string answerText)

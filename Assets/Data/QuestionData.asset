@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d01af6a36b43c6bd1c2f670577719c, type: 3}
   m_Name: QuestionData
   m_EditorClassIdentifier: 
-  _number: 0
-  _operation: 3
+  _minRange: 1
+  _maxRange: 10
+  _operation: 0
