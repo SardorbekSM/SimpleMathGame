@@ -13,7 +13,7 @@ namespace Gameplay
         [SerializeField] private UnityEvent _timerEnded;
 
         private Coroutine timerCoroutine;
-        
+
         public void StartTimer()
         {
             timerCoroutine = StartCoroutine(TimerCoroutine());
@@ -35,7 +35,7 @@ namespace Gameplay
                 currentTime--;
                 yield return new WaitForSeconds(1);
             }
-            
+
             _secondsTick.Invoke(currentTime);
             _timerEnded.Invoke();
         }

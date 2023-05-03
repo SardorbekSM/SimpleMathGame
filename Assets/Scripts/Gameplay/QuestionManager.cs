@@ -10,10 +10,14 @@ namespace Gameplay
 {
     public class QuestionManager : MonoBehaviour
     {
+        public List<int> Answers => _answers;
+
         [SerializeField] private QuestionData _questionData;
         [SerializeField] private RandomNumberGenerator _randomizer;
         [SerializeField] private UnityStringEvent _questionText;
 
+        private readonly List<int> _answers = new List<int>();
+        
         private int _leftTerm;
         private int _rightTerm;
         private int _solve;
@@ -27,19 +31,32 @@ namespace Gameplay
 
             _solve = SolveAnswer(_leftTerm, _rightTerm, _questionData.MathOperations);
             
-            return $"{_leftTerm} {GetOperationSymbol(_questionData.MathOperations)} {_rightTerm} = ?";
+            _answers.Add(_solve);
+            
+            var questionText = $"{_leftTerm} {GetOperationSymbol(_questionData.MathOperations)} {_rightTerm} = ?";
+            
+            _questionText.Invoke(questionText);
+            
+            _answers.AddRange(GenerateWrongAnswers(_solve));
+
+            return questionText;
         }
 
-        public int[] GenerateWrongAnswers(int rightAnswer)
+        private static IEnumerable<int> GenerateWrongAnswers(int rightAnswer)
         {
-            var wrongAnswers = new List<int>
-            {
-                Random.Range(rightAnswer - 3, rightAnswer + 3),
-                Random.Range(rightAnswer - 3, rightAnswer + 3),
-                Random.Range(rightAnswer - 3, rightAnswer + 3)
-            };
+            var wrongAnswers = new List<int>();
 
-            return wrongAnswers.ToArray();
+            while (wrongAnswers.Count < 3)
+            {
+                var random = Random.Range(rightAnswer - 3, rightAnswer + 3);
+
+                if (random != rightAnswer)
+                {
+                    wrongAnswers.Add(random);
+                }
+            }
+
+            return wrongAnswers;
         }
 
         public bool CheckAnswer(int answer)
